@@ -1,7 +1,7 @@
 
 module.exports = {
 
-    adapter: 'mongodb_dev',
+    connection: 'mongodb_dev',
 
     tableName: 'access_tokens',
 

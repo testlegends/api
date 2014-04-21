@@ -28,7 +28,6 @@ passport.use(new BearerStrategy(
 
             if (token.userId !== null) {
                 User.findOne({ id: token.userId }, function (err, user) {
-console.log(user);
                     if (err) { return done(err); }
                     if (!user) { return done(null, false); }
                     // to keep this example simple, restricted scopes are not implemented,
