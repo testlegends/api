@@ -1,5 +1,5 @@
 var passport = require('passport'),
-    LocalStrategy = require('passport-local').Strategy,
+    BearerStrategy = require('passport-http-bearer').Strategy,
     bcrypt = require('bcrypt');
 
 passport.serializeUser(function (user, done) {
@@ -7,23 +7,50 @@ passport.serializeUser(function (user, done) {
 });
 
 passport.deserializeUser(function (id, done) {
-    User.findById(id, function (err, user) {
+    User.findOne({ id: id }, function (err, user) {
         done(err, user);
     });
 });
 
-passport.use(new LocalStrategy(
-    function (username, password, done) {
-        User.findByUsername(username).done(function (err, user) {
-            if (err) { return done(null, err); }
-            if (!user || user.length < 1) { return done(null, false, { message: 'Incorrect User'}); }
-            bcrypt.compare(password, user[0].password, function (err, res) {
-                if (!res) return done(null, false, { message: 'Invalid Password'});
-                return done(null, user);
-            });
+/**
+ * BearerStrategy
+ *
+ * This strategy is used to authenticate either users or clients based on an access token
+ * (aka a bearer token).  If a user, they must have previously authorized a client
+ * application, which is issued an access token to make requests on behalf of
+ * the authorizing user.
+ */
+passport.use(new BearerStrategy(
+    function (accessToken, done) {
+        AccessToken.findOne({ token: accessToken }, function (err, token) {
+            if (err) { return done(err); }
+            if (!token) { return done(null, false); }
+
+            if (token.userId !== null) {
+                User.findOne({ id: token.userId }, function (err, user) {
+console.log(user);
+                    if (err) { return done(err); }
+                    if (!user) { return done(null, false); }
+                    // to keep this example simple, restricted scopes are not implemented,
+                    // and this is just for illustrative purposes
+                    var info = { scope: '*' };
+                    done(null, user, info);
+                });
+            } else {
+                //The request came from a client only since userID is null
+                //therefore the client is passed back instead of a user
+                Client.findOne({ clientId: token.clientId }, function (err, client) {
+                    if (err) { return done(err); }
+                    if (!client) { return done(null, false); }
+                    // to keep this example simple, restricted scopes are not implemented,
+                    // and this is just for illustrative purposes
+                    var info = { scope: '*' };
+                    done(null, client, info);
+                });
+            }
         });
-    })
-);
+    }
+));
 
 module.exports = {
     express: {

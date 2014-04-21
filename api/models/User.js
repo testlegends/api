@@ -11,6 +11,8 @@ var bcrypt = require('bcrypt');
 
 module.exports = {
 
+    adapter: 'mongodb_dev',
+
     tableName: 'users',
 
     attributes: {
