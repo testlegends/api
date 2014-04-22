@@ -1,5 +1,5 @@
 {
-  "name": "TestLegends-API",
+  "name": "TestLegendsAPI",
   "description": "API for TestLegends",
   "author": "Jeff Lee",
   "version": "0.1.0",
@@ -42,7 +42,6 @@
   "scripts": {
     "start": "node app.js",
     "debug": "node debug app.js",
-    "start-test": "node app.js --adapters.default=test",
     "update-webdriver": "webdriver-manager update",
     "test": "karma start karma.conf.js --single-run",
     "protractor": "protractor tests/protractor.conf.js"

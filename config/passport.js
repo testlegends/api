@@ -38,7 +38,7 @@ passport.use(new BearerStrategy(
             } else {
                 //The request came from a client only since userID is null
                 //therefore the client is passed back instead of a user
-                Client.findOne({ clientId: token.clientId }, function (err, client) {
+                Client.findOne({ _id: token.clientId }, function (err, client) {
                     if (err) { return done(err); }
                     if (!client) { return done(null, false); }
                     // to keep this example simple, restricted scopes are not implemented,

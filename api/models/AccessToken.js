@@ -7,10 +7,10 @@ module.exports = {
 
     attributes: {
         userId: {
-            type: 'integer'
+            type: 'string'
         },
         clientId: {
-            type: 'integer'
+            type: 'string'
         },
         token: {
             type: 'string'

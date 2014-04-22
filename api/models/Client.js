@@ -6,13 +6,7 @@ module.exports = {
     tableName: 'clients',
 
     attributes: {
-        id: {
-            type: 'integer'
-        },
         name: {
-            type: 'string'
-        },
-        clientId: {
             type: 'string'
         },
         clientSecret: {

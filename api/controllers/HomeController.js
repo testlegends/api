@@ -2,7 +2,7 @@
 module.exports = {
 
     index: function (req, res) {
-        return res.redirect('http://dev.testlegends.com');
+        return res.redirect('http://testlegends.herokuapp.com');
     },
 
     _config: {}
