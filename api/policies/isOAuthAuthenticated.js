@@ -1,11 +1,11 @@
 /**
- * isAuthenticated
+ * isOAuthAuthenticated
  *
  * @module      :: Policy
- * @description :: Simple policy to allow any authenticated user
- *                 Assumes that your login action in one of your controllers sets `req.session.authenticated = true;`
- * @docs        :: http://sailsjs.org/#!documentation/policies
- *
+ * @description ::
+ * @docs        :: https://github.com/jaredhanson/oauth2orize/tree/master/examples/all-grants/
+ * @author      :: Jeff Lee
+ * @created     :: 2014/04/20
  */
 
 var Passport = require('passport');

@@ -18,16 +18,12 @@ module.exports.express = {
 	// loadMiddleware: function( app, defaultMiddleware, sails ) { ... }
 
 
-
-
 	// Override one or more of the default middleware (besides bodyParser, cookieParser)
 	//
 	// middleware: {
 	//    session: false, // turn off session completely for HTTP requests
 	//    404: function ( req, res, next ) { ... your custom 404 middleware ... }
 	// }
-
-
 
 
 	// The middleware function used for parsing the HTTP request body.
@@ -68,7 +64,6 @@ module.exports.express = {
 	// ======================================================================
 
 
-
 	// Cookie parser middleware to use
 	//			(or false to disable)
 	//
@@ -76,7 +71,6 @@ module.exports.express = {
 	//
 	// Example override:
 	// cookieParser: (function customMethodOverride (req, res, next) {})(),
-
 
 
 	// HTTP method override middleware
@@ -92,9 +86,6 @@ module.exports.express = {
 	// Example override:
 	// methodOverride: (function customMethodOverride (req, res, next) {})()
 };
-
-
-
 
 
 /**

@@ -1,3 +1,12 @@
+/**
+ * Passport
+ *
+ * @description ::
+ * @docs        :: https://github.com/jaredhanson/oauth2orize/tree/master/examples/all-grants
+ * @author      :: Jeff Lee
+ * @created     :: 2014/04/20
+ */
+
 var passport = require('passport'),
     BearerStrategy = require('passport-http-bearer').Strategy,
     bcrypt = require('bcrypt');
