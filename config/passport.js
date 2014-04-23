@@ -8,8 +8,7 @@
  */
 
 var passport = require('passport'),
-    BearerStrategy = require('passport-http-bearer').Strategy,
-    bcrypt = require('bcrypt');
+    BearerStrategy = require('passport-http-bearer').Strategy;
 
 passport.serializeUser(function (user, done) {
     done(null, user[0].id);
