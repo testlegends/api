@@ -7,6 +7,8 @@
  * @created     :: 2014/04/20
  */
 
+// Just for the fields, the real Client model is in home
+
 module.exports = {
 
     connection: 'mongodb_dev',

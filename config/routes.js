@@ -14,10 +14,10 @@ module.exports.routes = {
 
     'GET /user': 'UserController.find', // get current user info
 
-    'GET /players':    'PlayerController.index', // need userId param
-    'GET /player/:id': 'PlayerController.find',
+    'GET /heroes':   'HeroController.index',
+    'GET /hero/:id': 'HeroController.find',
 
-    'GET /games':    'GameController.index', // need creatorId param
+    'GET /games':    'GameController.index', // for creators (teachers) only
     'GET /game/:id': 'GameController.find',
 
     'GET /questions':    'QuestionController.index', // need gameId param

@@ -30,6 +30,10 @@ module.exports = {
             type: 'json'
         },
 
+        meta: {
+            type: 'json'
+        },
+
         stats: {
             type: 'json'
         }
@@ -52,5 +56,14 @@ var example = {
             'adamant',
             'abject'
         ]
+    },
+
+    meta: {
+        gameId: '1'
+    },
+
+    stats: {
+
     }
+
 };

@@ -7,6 +7,8 @@
  * @created     :: 2014/02/08
  */
 
+// Just for the fields, the real User model is in home
+
 module.exports = {
 
     connection: 'mongodb_dev',

@@ -37,28 +37,26 @@ module.exports = {
 };
 
 var example = {
+
     name: 'Game of Thrones',
 
     monsters: [
         {
             name: 'monster',
-
             type: 'minion',
-
             meta: {
-                character_src: 'furball.png',
+                character_src: 'ufo.png',
                 attack: 10,
                 defense: 8,
                 hp: 100
             }
-
         }
     ],
 
     background: 'space.jpg',
 
     meta: {
-        creatorId: "1",
+        creatorId: "1", // userId
         questions_per_stage: 20,
         time_per_question: 20 //seconds
     },

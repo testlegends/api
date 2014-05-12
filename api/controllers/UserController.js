@@ -10,10 +10,12 @@
 module.exports = (function () {
 
     function find (req, res) {
-console.log(req.user);
-        return res.json({
-            name: 'Jeff Lee'
-        });
+        var user = req.user;
+
+        delete user.password;
+        delete user.password_reset_key;
+
+        return res.json(user);
     }
 
     return {

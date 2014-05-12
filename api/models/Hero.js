@@ -9,13 +9,9 @@
 
 module.exports = {
 
-    tableName: 'players',
+    tableName: 'heroes',
 
     attributes: {
-        userId: {
-            type: 'string'
-        },
-
         name: {
             type: 'string'
         },
@@ -47,8 +43,6 @@ module.exports = {
 
 var example = {
 
-    userId: '1',
-
     name: 'leejefon',
 
     type: 'archer',
@@ -63,9 +57,14 @@ var example = {
     ],
 
     meta: {
+        userId: '1',
         attack: 10,
         hp: 100, // Max HP
         mana: 100 // Max Mana
+    },
+
+    stats: {
+
     }
 
 };
