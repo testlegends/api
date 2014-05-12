@@ -16,8 +16,14 @@ module.exports = (function () {
         });
     }
 
+    function find (req, res) {
+
+    }
+
     return {
         index: index,
+        find: find,
+
         _config: {}
     };
 

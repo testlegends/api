@@ -9,7 +9,18 @@
 
 module.exports = (function () {
 
+    function index (req, res) {
+
+    }
+
+    function find (req, res) {
+
+    }
+
     return {
+        index: index,
+        find: find,
+
         _config: {}
     };
 

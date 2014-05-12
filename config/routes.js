@@ -10,8 +10,17 @@
 
 module.exports.routes = {
 
-    '/': { controller: 'home', action: 'index' },
+    '/': 'HomeController.index',
 
-    'GET /player': { controller: 'player', action: 'index' }
+    'GET /user': 'UserController.find', // get current user info
+
+    'GET /players':    'PlayerController.index', // need userId param
+    'GET /player/:id': 'PlayerController.find',
+
+    'GET /games':    'GameController.index', // need creatorId param
+    'GET /game/:id': 'GameController.find',
+
+    'GET /questions':    'QuestionController.index', // need gameId param
+    'GET /question/:id': 'QuestionController.find'
 
 };

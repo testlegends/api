@@ -9,7 +9,16 @@
 
 module.exports = (function () {
 
+    function find (req, res) {
+console.log(req.user);
+        return res.json({
+            name: 'Jeff Lee'
+        });
+    }
+
     return {
+        find: find,
+
         _config: {}
     };
 
