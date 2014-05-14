@@ -18,6 +18,7 @@ module.exports.routes = {
     'GET /hero/:id': 'HeroController.find',
 
     'GET /games':    'GameController.index', // for creators (teachers) only
+    'PUT /games':    'GameController.create',
     'GET /game/:id': 'GameController.find',
 
     'GET /questions':    'QuestionController.index', // need gameId param

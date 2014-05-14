@@ -59,7 +59,8 @@ var example = {
     },
 
     meta: {
-        gameId: '1'
+        gameId: '1',
+        order: 1
     },
 
     stats: {

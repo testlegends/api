@@ -26,19 +26,29 @@ module.exports = {
             required: true
         },
 
-        password: {
-            type: 'string'
-        },
-
         role: {
             type: 'string',
             in: ['admin', 'student', 'teacher'],
             defaultsTo: 'student'
         },
 
+        password: {
+            type: 'string'
+        },
+
         password_reset_key: {
             type: 'string',
             defaultsTo: null
+        },
+
+        games: {
+            type: 'array',
+            defaultsTo: []
+        },
+
+        payments: {
+            type: 'array',
+            defaultsTo: []
         },
 
         toJSON: function () {

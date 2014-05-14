@@ -49,13 +49,6 @@ var example = {
 
     skills: ['Ultimate'],
 
-    games: [
-        {
-            id: "1",
-            questions_completed: 10
-        }
-    ],
-
     meta: {
         userId: '1',
         attack: 10,

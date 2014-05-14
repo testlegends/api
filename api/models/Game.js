@@ -13,11 +13,13 @@ module.exports = {
 
     attributes: {
         name: {
-            type: 'string'
+            type: 'string',
+            required: true
         },
 
         monsters: {
-            type: 'arary'
+            type: 'arary',
+            defaultsTo: []
         },
 
         background: {
@@ -26,11 +28,13 @@ module.exports = {
         },
 
         meta: {
-            type: 'json'
+            type: 'json',
+            defaultsTo: {}
         },
 
         stats: {
-            type: 'json'
+            type: 'json',
+            defaultsTo: {}
         }
     }
 
@@ -57,8 +61,13 @@ var example = {
 
     meta: {
         creatorId: "1", // userId
+        scope: "public",
+        status: "draft",
         questions_per_stage: 20,
-        time_per_question: 20 //seconds
+        time_per_question: 20, //seconds
+        stuff_to_give_out: {
+            
+        }
     },
 
     stats: {

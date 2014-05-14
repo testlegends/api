@@ -26,7 +26,9 @@ module.exports = (function () {
                 console.log(err);
             }
 
-            return res.json(questions);
+            return res.json({
+                data: questions
+            });
         });
     }
 

@@ -14,7 +14,7 @@ module.exports = (function () {
 
         if (role !== 'admin' && role !== 'teacher') {
             return res.json({
-                error: 'TEACHER_ONLY',
+                err: 'TEACHER_ONLY',
                 msg: 'This API operation is for teacher only.'
             });
         }
@@ -30,6 +30,36 @@ module.exports = (function () {
 
             return res.json(games);
         });
+    }
+
+    function create (req, res) {
+        var privateGameAvaliable = false;
+        var name = req.body.name;
+        var scope = req.body.scope;
+
+        if (privateGameAvailable) {
+            Game.create({
+                name: name,
+                meta: {
+                    creatorId: req.user.id,
+                    scope: scope,
+                    status: 'draft'
+                }
+            }, function (err, game) {
+                if (err) {
+                    console.log(err);
+                }
+
+                return res.json({
+                    data: game
+                });
+            });
+        } else {
+            return res.json({
+                err: 'NO_PRIVATE_AVALIABLE',
+                msg: 'No private game available for your account'
+            });
+        }
     }
 
     function find (req, res) {
@@ -48,6 +78,7 @@ module.exports = (function () {
 
     return {
         index: index,
+        create: create,
         find: find,
 
         _config: {}
