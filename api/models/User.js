@@ -33,7 +33,8 @@ module.exports = {
         },
 
         password: {
-            type: 'string'
+            type: 'string',
+            defaultsTo: null
         },
 
         password_reset_key: {

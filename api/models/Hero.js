@@ -13,29 +13,35 @@ module.exports = {
 
     attributes: {
         name: {
-            type: 'string'
+            type: 'string',
+            required: true
         },
 
         type: {
             type: 'string',
-            in: ['archer', 'magician']
+            in: ['archer', 'magician'],
+            defaultsTo: 'archer'
         },
 
         skills: {
             type: 'array',
-            in: ['Ultimate']
+            in: ['Ultimate'],
+            defaultsTo: []
         },
 
         games: {
-            type: 'array'
+            type: 'array',
+            defaultsTo: []
         },
 
         meta: {
-            type: 'json'
+            type: 'json',
+            defaultsTo: {}
         },
 
         stats: {
-            type: 'json'
+            type: 'json',
+            defaultsTo: {}
         }
     }
 

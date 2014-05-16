@@ -22,6 +22,7 @@ module.exports.routes = {
     'GET /game/:id': 'GameController.find',
 
     'GET /questions':    'QuestionController.index', // need gameId param
+    'PUT /questions':    'QuestionController.create',
     'GET /question/:id': 'QuestionController.find'
 
 };

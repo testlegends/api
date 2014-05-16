@@ -14,20 +14,24 @@ module.exports = {
     attributes: {
         type: {
             type: 'string',
-            in: ['multiple']
+            in: ['multiple_choice', 'fill_blank', 'short_answer'],
+            defaultsTo: 'multiple_choice'
         },
 
         difficulty: {
             type: 'string',
-            in: ['easy', 'medium', 'hard']
+            in: ['easy', 'medium', 'hard'],
+            defaultsTo: 'easy'
         },
 
         content: {
-            type: 'string'
+            type: 'string',
+            defaultsTo: null
         },
 
         options: {
-            type: 'json'
+            type: 'json',
+            defaultsTo: {}
         },
 
         meta: {
@@ -35,7 +39,8 @@ module.exports = {
         },
 
         stats: {
-            type: 'json'
+            type: 'json',
+            defaultsTo: {}
         }
     }
 

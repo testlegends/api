@@ -32,6 +32,14 @@ module.exports = (function () {
         });
     }
 
+    function create (req, res) {
+        console.log(req.body);
+
+        return res.json({
+            data: {}
+        });
+    }
+
     function find (req, res) {
         var questionId = req.param('id');
 
@@ -48,6 +56,7 @@ module.exports = (function () {
 
     return {
         index: index,
+        create: create,
         find: find,
 
         _config: {}

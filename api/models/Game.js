@@ -63,10 +63,11 @@ var example = {
         creatorId: "1", // userId
         scope: "public",
         status: "draft",
+        default_options_per_question: 4,
         questions_per_stage: 20,
         time_per_question: 20, //seconds
         stuff_to_give_out: {
-            
+
         }
     },
 

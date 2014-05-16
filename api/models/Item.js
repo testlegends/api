@@ -15,6 +15,11 @@ module.exports = {
         name: {
             type: 'string',
             required: true
+        },
+
+        meta: {
+            type: 'json',
+            defaultsTo: {}
         }
     }
 
@@ -22,6 +27,11 @@ module.exports = {
 
 var example = {
 
-    name: 'Sword'
+    name: 'Sword',
+
+    meta: {
+        hp: -10,
+        attack: 5
+    }
 
 };

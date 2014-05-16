@@ -28,12 +28,16 @@ module.exports = (function () {
                 console.log(err);
             }
 
-            return res.json(games);
+            return res.json({
+                data: games
+            });
         });
     }
 
     function create (req, res) {
-        var privateGameAvaliable = false;
+        // TODO need to check payment history
+        var privateGameAvailable = true;
+
         var name = req.body.name;
         var scope = req.body.scope;
 
@@ -72,7 +76,9 @@ module.exports = (function () {
                 console.log(err);
             }
 
-            return res.json(game);
+            return res.json({
+                data: game
+            });
         });
     }
 
