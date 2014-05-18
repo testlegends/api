@@ -12,17 +12,20 @@ module.exports.routes = {
 
     '/': 'HomeController.index',
 
-    'GET /user': 'UserController.find', // get current user info
+    'GET  /user': 'UserController.find', // get current user info
 
-    'GET /heroes':   'HeroController.index',
-    'GET /hero/:id': 'HeroController.find',
+    'GET  /heroes':   'HeroController.index',
+    'GET  /hero/:id': 'HeroController.find',
 
-    'GET /games':    'GameController.index', // for creators (teachers) only
-    'PUT /games':    'GameController.create',
-    'GET /game/:id': 'GameController.find',
+    'GET    /games':    'GameController.index', // for creators (teachers) only
+    'PUT    /games':    'GameController.create',
+    'GET    /game/:id': 'GameController.find',
+    'POST   /game/:id': 'GameController.update',
+    'DELETE /game/:id': 'GameController.remove',
 
-    'GET /questions':    'QuestionController.index', // need gameId param
-    'PUT /questions':    'QuestionController.create',
-    'GET /question/:id': 'QuestionController.find'
-
+    'GET    /questions':    'QuestionController.index', // need gameId param
+    'PUT    /questions':    'QuestionController.create',
+    'GET    /question/:id': 'QuestionController.find',
+    'POST   /question/:id': 'QuestionController.update',
+    'DELETE /question/:id': 'QuestionController.remove'
 };

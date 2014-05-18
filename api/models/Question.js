@@ -57,9 +57,9 @@ var example = {
     options: {
         correct: 'abhor',
         wrong: [
-            'abash',
-            'adamant',
-            'abject'
+            { text: 'abash' },
+            { text: 'adamant' },
+            { text: 'abject' }
         ]
     },
 

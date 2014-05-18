@@ -82,10 +82,26 @@ module.exports = (function () {
         });
     }
 
+    function update (req, res) {
+        var gameId = req.param('id');
+
+        return res.json({
+            data: {}
+        });
+    }
+
+    function remove (req, res) {
+        return res.json({
+            status: 'OK'
+        });
+    }
+
     return {
         index: index,
         create: create,
         find: find,
+        update: update,
+        remove: remove,
 
         _config: {}
     };

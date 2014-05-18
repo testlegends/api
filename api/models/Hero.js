@@ -29,11 +29,6 @@ module.exports = {
             defaultsTo: []
         },
 
-        games: {
-            type: 'array',
-            defaultsTo: []
-        },
-
         meta: {
             type: 'json',
             defaultsTo: {}

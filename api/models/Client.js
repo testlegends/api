@@ -19,17 +19,37 @@ module.exports = {
         name: {
             type: 'string'
         },
+
         clientSecret: {
             type: 'string'
         },
+
         userId: {
             type: 'string'
         },
+
         redirectURI: {
             type: 'json'
         },
+
         icon: {
             type: 'string'
         }
     }
+};
+
+var example = {
+
+    name: 'TestLegends Build',
+
+    clientSecret: 'whatever',
+
+    userId: '1',
+
+    redirectURI: {
+        protocol: 'http',
+        domain: 'build.testlegends.com'
+    },
+
+    icon: 'icon.png'
 };
