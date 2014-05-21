@@ -23,7 +23,7 @@ module.exports.connections = {
         password: process.env.MONGOHQ_PASSWORD
     },
 
-    mongodb_dev: {
+    mongodb_oauth_server: {
         module: 'sails-mongo',
         host: process.env.MONGOHQ_OAUTH_HOST,
         port: process.env.MONGOHQ_OAUTH_PORT,

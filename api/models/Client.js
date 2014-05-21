@@ -9,13 +9,13 @@
 
 // Just for the fields, the real Client model is in home
 
-module.exports = {
+module.exports = (function(){
 
-    connection: 'mongodb_dev',
+    var connection = 'mongodb_oauth_server';
 
-    tableName: 'clients',
+    var tableName = 'clients';
 
-    attributes: {
+    var attributes = {
         name: {
             type: 'string'
         },
@@ -35,21 +35,30 @@ module.exports = {
         icon: {
             type: 'string'
         }
+    };
+
+    var example = {
+        name: 'TestLegends Build',
+
+        clientSecret: 'whatever',
+
+        userId: '1',
+
+        redirectURI: {
+            protocol: 'http',
+            domain: 'build.testlegends.com'
+        },
+
+        icon: 'icon.png'
+    };
+
+    if (process.env.NODE_ENV === 'development') {
+        tableName += '_test';
     }
-};
 
-var example = {
-
-    name: 'TestLegends Build',
-
-    clientSecret: 'whatever',
-
-    userId: '1',
-
-    redirectURI: {
-        protocol: 'http',
-        domain: 'build.testlegends.com'
-    },
-
-    icon: 'icon.png'
-};
+    return {
+        connection: connection,
+        tableName: tableName,
+        attributes: attributes
+    };
+})();

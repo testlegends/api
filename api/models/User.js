@@ -9,13 +9,13 @@
 
 // Just for the fields, the real User model is in home
 
-module.exports = {
+module.exports = (function(){
 
-    connection: 'mongodb_dev',
+    var connection = 'mongodb_oauth_server';
 
-    tableName: 'users',
+    var tableName = 'users';
 
-    attributes: {
+    var attributes = {
         name: {
             type: 'string',
             required: true
@@ -33,8 +33,7 @@ module.exports = {
         },
 
         password: {
-            type: 'string',
-            defaultsTo: null
+            type: 'string'
         },
 
         password_reset_key: {
@@ -58,5 +57,15 @@ module.exports = {
             delete obj.password_reset_key;
             return obj;
         }
+    };
+
+    if (process.env.NODE_ENV === 'development') {
+        tableName += '_test';
     }
-};
+
+    return {
+        connection: connection,
+        tableName: tableName,
+        attributes: attributes
+    };
+})();

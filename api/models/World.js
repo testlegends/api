@@ -7,16 +7,24 @@
  * @created     :: 2014/04/28
  */
 
-module.exports = {
+module.exports = (function(){
 
-    tableName: 'worlds',
+    var tableName = 'worlds';
 
-    attributes: {
+    var attributes = {
 
+    };
+
+    var example = {
+
+    };
+
+    if (process.env.NODE_ENV === 'development') {
+        tableName += '_test';
     }
 
-};
-
-var example = {
-
-};
+    return {
+        tableName: tableName,
+        attributes: attributes
+    };
+})();

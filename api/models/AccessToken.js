@@ -9,21 +9,29 @@
 
 // Just for the fields, the real AccessToken model is in home
 
-module.exports = {
+module.exports = (function(){
 
-    connection: 'mongodb_dev',
+    var connection = 'mongodb_oauth_server';
 
-    tableName: 'access_tokens',
+    var tableName = 'access_tokens';
 
-    attributes: {
+    var attributes = {
         userId: {
             type: 'string'
         },
+
         clientId: {
             type: 'string'
         },
+
         token: {
             type: 'string'
         }
+    };
+
+    return {
+        connection: connection,
+        tableName: tableName,
+        attributes: attributes
     }
-};
+})();

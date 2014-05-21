@@ -7,11 +7,11 @@
  * @created     :: 2014/04/20
  */
 
-module.exports = {
+module.exports = (function(){
 
-    tableName: 'heroes',
+    var tableName = 'heroes';
 
-    attributes: {
+    var attributes = {
         name: {
             type: 'string',
             required: true
@@ -38,27 +38,33 @@ module.exports = {
             type: 'json',
             defaultsTo: {}
         }
+    };
+
+    var example = {
+        name: 'leejefon',
+
+        type: 'archer',
+
+        skills: ['Ultimate'],
+
+        meta: {
+            userId: '1',
+            attack: 10,
+            hp: 100, // Max HP
+            mana: 100 // Max Mana
+        },
+
+        stats: {
+
+        }
+    };
+
+    if (process.env.NODE_ENV === 'development') {
+        tableName += '_test';
     }
 
-};
-
-var example = {
-
-    name: 'leejefon',
-
-    type: 'archer',
-
-    skills: ['Ultimate'],
-
-    meta: {
-        userId: '1',
-        attack: 10,
-        hp: 100, // Max HP
-        mana: 100 // Max Mana
-    },
-
-    stats: {
-
-    }
-
-};
+    return {
+        tableName: tableName,
+        attributes: attributes
+    };
+})();

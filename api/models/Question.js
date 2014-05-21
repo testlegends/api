@@ -7,11 +7,11 @@
  * @created     :: 2014/04/20
  */
 
-module.exports = {
+module.exports = (function(){
 
-    tableName: 'questions',
+    var tableName = 'questions';
 
-    attributes: {
+    var attributes = {
         type: {
             type: 'string',
             in: ['multiple_choice', 'fill_blank', 'short_answer'],
@@ -42,34 +42,40 @@ module.exports = {
             type: 'json',
             defaultsTo: {}
         }
+    };
+
+    var example = {
+        type: 'multiple',
+
+        difficulty: 'easy',
+
+        content: "Mr. Jobling stood wringing his hands helplessly, his flaccid features expressive of _______ despair.",
+
+        options: {
+            correct: 'abhor',
+            wrong: [
+                { text: 'abash' },
+                { text: 'adamant' },
+                { text: 'abject' }
+            ]
+        },
+
+        meta: {
+            gameId: '1',
+            order: 1
+        },
+
+        stats: {
+
+        }
+    };
+
+    if (process.env.NODE_ENV === 'development') {
+        tableName += '_test';
     }
 
-};
-
-var example = {
-
-    type: 'multiple',
-
-    difficulty: 'easy',
-
-    content: "Mr. Jobling stood wringing his hands helplessly, his flaccid features expressive of _______ despair.",
-
-    options: {
-        correct: 'abhor',
-        wrong: [
-            { text: 'abash' },
-            { text: 'adamant' },
-            { text: 'abject' }
-        ]
-    },
-
-    meta: {
-        gameId: '1',
-        order: 1
-    },
-
-    stats: {
-
-    }
-
-};
+    return {
+        tableName: tableName,
+        attributes: attributes
+    };
+})();
