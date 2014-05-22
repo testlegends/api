@@ -28,11 +28,14 @@
     "passport-http-bearer": "^1.0.1"
   },
   "devDependencies": {
-    "frisby": "^0.8.1"
+    "frisby": "^0.8.1",
+    "mongodb": "^1.4.5"
   },
   "scripts": {
     "start": "node app.js",
+    "debug": "node debug app.js",
     "test": "jasmine-node spec",
-    "debug": "node debug app.js"
+    "test-dbclean": "node scripts/testdb.js clean",
+    "test-dbload": "node scripts/testdb.js load"
   }
 }
