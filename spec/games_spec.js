@@ -9,8 +9,11 @@
 
 var frisby = require('frisby');
 
+var oauthServerUrl = 'http://localhost:1338';
+var apiServerUrl = 'http://localhost:1339';
+
 frisby.create('OAuth2 login')
-    .post('http://localhost:1338/oauth/token', {
+    .post(oauthServerUrl + '/oauth/token', {
         username: 'q@q.cc',
         password: 'fu041u03',
         client_id: '53562b9335e2e5c84c0001fa',
@@ -25,9 +28,9 @@ frisby.create('OAuth2 login')
         });
 
         frisby.create('Get Games')
-            .get('http://localhost:1339/games')
+            .get(apiServerUrl + '/games')
             .expectStatus(200)
-            .expectJSONLength(1)
+            .expectJSONLength(2)
             .toss();
     })
     .toss();

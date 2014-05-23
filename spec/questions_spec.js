@@ -9,8 +9,11 @@
 
 var frisby = require('frisby');
 
+var oauthServerUrl = 'http://localhost:1338';
+var apiServerUrl = 'http://localhost:1339';
+
 frisby.create('OAuth2 login')
-    .post('http://localhost:1338/oauth/token', {
+    .post(oauthServerUrl + '/oauth/token', {
         username: 'q@q.cc',
         password: 'fu041u03',
         client_id: '53562b9335e2e5c84c0001fa',
@@ -25,5 +28,60 @@ frisby.create('OAuth2 login')
         });
 
 
+        frisby.create('Get List of Games')
+            .get(apiServerUrl + '/games')
+            .expectStatus(200)
+            .expectJSONTypes({
+
+            })
+            .expectJSON({
+
+            })
+            .toss();
+
+        frisby.create('Create Games')
+            .put(apiServerUrl + '/games')
+            .expectStatus(200)
+            .expectJSONTypes({
+
+            })
+            .expectJSON({
+
+            })
+            .afterJSON(function (game) {
+                frisby.create('Get List of Games after Create')
+                    .get(apiServerUrl + '/games')
+                    .expectStatus(200)
+                    .expectJSONTypes({
+
+                    })
+                    .expectJSON({
+
+                    })
+                    .toss();
+
+                frisby.create('Get the game just created')
+                    .get(apiServerUrl + '/game/' + game.data.id)
+                    .expectStatus(200)
+                    .expectJSONTypes({
+
+                    })
+                    .expectJSON({
+
+                    })
+                    .toss();
+
+                frisby.create('Update the Game')
+                    .post(apiServerUrl + '/game/' + game.data.id)
+                    .expectStatus(200)
+                    .expectJSONTypes({
+
+                    })
+                    .expectJSON({
+
+                    })
+                    .toss();
+            })
+            .toss();
     })
     .toss();

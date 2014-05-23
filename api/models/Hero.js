@@ -40,25 +40,6 @@ module.exports = (function(){
         }
     };
 
-    var example = {
-        name: 'leejefon',
-
-        type: 'archer',
-
-        skills: ['Ultimate'],
-
-        meta: {
-            userId: '1',
-            attack: 10,
-            hp: 100, // Max HP
-            mana: 100 // Max Mana
-        },
-
-        stats: {
-
-        }
-    };
-
     if (process.env.NODE_ENV === 'development') {
         tableName += '_test';
     }

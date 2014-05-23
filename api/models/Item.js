@@ -23,15 +23,6 @@ module.exports = (function(){
         }
     };
 
-    var example = {
-        name: 'Sword',
-
-        meta: {
-            hp: -10,
-            attack: 5
-        }
-    };
-
     if (process.env.NODE_ENV === 'development') {
         tableName += '_test';
     }

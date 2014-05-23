@@ -29,9 +29,13 @@ module.exports = (function(){
         }
     };
 
+    if (process.env.NODE_ENV === 'development') {
+        tableName += '_test';
+    }
+
     return {
         connection: connection,
         tableName: tableName,
         attributes: attributes
-    }
+    };
 })();
