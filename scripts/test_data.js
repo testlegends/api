@@ -5,8 +5,6 @@
  * @created     :: 2014/05/21
  */
 
-
-
 module.exports = {
 
     games_test: [
