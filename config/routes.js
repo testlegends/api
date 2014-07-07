@@ -17,7 +17,7 @@ module.exports.routes = {
     'GET  /heroes':   'HeroController.index',
     'GET  /hero/:id': 'HeroController.find',
 
-    'GET    /games':    'GameController.index', // for creators (teachers) only
+    'GET    /games':    'GameController.index',
     'PUT    /games':    'GameController.create',
     'GET    /game/:id': 'GameController.find',
     'POST   /game/:id': 'GameController.update',
@@ -27,5 +27,11 @@ module.exports.routes = {
     'PUT    /questions':    'QuestionController.create',
     'GET    /question/:id': 'QuestionController.find',
     'POST   /question/:id': 'QuestionController.update',
-    'DELETE /question/:id': 'QuestionController.remove'
+    'DELETE /question/:id': 'QuestionController.remove',
+
+    'GET    /lists':     'ListController.index',
+    'PUT    /lists':     'ListController.create',
+    'GET    /list/:id': 'ListController.find',
+    'POST   /list/:id': 'ListController.update',
+    'DELETE /list/:id': 'ListController.remove'
 };

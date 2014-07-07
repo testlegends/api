@@ -7,6 +7,23 @@
 
 module.exports = {
 
+    lists_test: [
+        {
+            title: 'Physics Class',
+            desc: 'Grade 12 physics class',
+            terms: [
+                {
+                    term: 'g',
+                    desc: 'gravitational force'
+                }
+            ],
+            meta: {
+                creatorId: '',
+                userId: ''
+            }
+        }
+    ],
+
     games_test: [
         {
             name: "Game of Thrones",
