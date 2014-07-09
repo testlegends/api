@@ -27,6 +27,7 @@ module.exports = (function () {
             }
 
             return res.json({
+                status: 'OK',
                 data: questions
             });
         });
@@ -55,6 +56,7 @@ module.exports = (function () {
             }
 
             return res.json({
+                status: 'OK',
                 data: question
             });
         });
@@ -71,6 +73,7 @@ module.exports = (function () {
             }
 
             return res.json({
+                status: 'OK',
                 data: question
             });
         });
@@ -101,6 +104,7 @@ module.exports = (function () {
             }
 
             return res.json({
+                status: 'OK',
                 data: question
             });
         });

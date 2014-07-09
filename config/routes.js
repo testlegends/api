@@ -14,23 +14,23 @@ module.exports.routes = {
 
     'GET  /user': 'UserController.find', // get current user info
 
-    'GET  /heroes':   'HeroController.index',
+    'GET  /heroes'  : 'HeroController.index',
     'GET  /hero/:id': 'HeroController.find',
 
-    'GET    /games':    'GameController.index',
-    'PUT    /games':    'GameController.create',
+    'GET    /games'   : 'GameController.index',
+    'PUT    /games'   : 'GameController.create',
     'GET    /game/:id': 'GameController.find',
     'POST   /game/:id': 'GameController.update',
     'DELETE /game/:id': 'GameController.remove',
 
-    'GET    /questions':    'QuestionController.index', // need gameId param
-    'PUT    /questions':    'QuestionController.create',
+    'GET    /questions'   : 'QuestionController.index', // need gameId param
+    'PUT    /questions'   : 'QuestionController.create',
     'GET    /question/:id': 'QuestionController.find',
     'POST   /question/:id': 'QuestionController.update',
     'DELETE /question/:id': 'QuestionController.remove',
 
-    'GET    /lists':     'ListController.index',
-    'PUT    /lists':     'ListController.create',
+    'GET    /lists'   : 'ListController.index',
+    'PUT    /lists'   : 'ListController.create',
     'GET    /list/:id': 'ListController.find',
     'POST   /list/:id': 'ListController.update',
     'DELETE /list/:id': 'ListController.remove'

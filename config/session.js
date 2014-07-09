@@ -45,11 +45,11 @@ module.exports.session = {
     // Optional Values:
     //
     // # Note: url will override other connection settings
-    url: process.env.MONGOHQ_URL + '/sesions',
+    url: process.env.MONGOHQ_URL + '/sessions',
     //
     // username: '',
     // password: '',
-    // auto_reconnect: false,
+    auto_reconnect: true,
     // ssl: false,
     // stringify: true
 

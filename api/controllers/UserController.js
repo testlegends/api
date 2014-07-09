@@ -9,6 +9,7 @@
 
 module.exports = (function () {
 
+    // Used for OAuth for now
     function find (req, res) {
         var user = req.user;
 

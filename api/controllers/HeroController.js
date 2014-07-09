@@ -19,7 +19,10 @@ module.exports = (function () {
                 console.log(err);
             }
 
-            return res.json(heroes);
+            return res.json({
+                status: 'OK',
+                data: heroes
+            });
         });
     }
 
@@ -33,7 +36,10 @@ module.exports = (function () {
                 console.log(err);
             }
 
-            return res.json(hero);
+            return res.json({
+                status: 'OK',
+                data: hero
+            });
         });
     }
 

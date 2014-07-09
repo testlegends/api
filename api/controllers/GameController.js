@@ -29,6 +29,7 @@ module.exports = (function () {
             }
 
             return res.json({
+                status: 'OK',
                 data: games
             });
         });
@@ -55,13 +56,14 @@ module.exports = (function () {
                 }
 
                 return res.json({
+                    status: 'OK',
                     data: game
                 });
             });
         } else {
             return res.json({
-                err: 'NO_PRIVATE_AVALIABLE',
-                msg: 'No private game available for your account'
+                status: 'NO_PRIVATE_AVALIABLE',
+                error: 'No private game available for your account'
             });
         }
     }
@@ -77,6 +79,7 @@ module.exports = (function () {
             }
 
             return res.json({
+                status: 'OK',
                 data: game
             });
         });
@@ -86,13 +89,15 @@ module.exports = (function () {
         var gameId = req.param('id');
 
         return res.json({
-            data: {}
+            status: 'OK',
+            data: null
         });
     }
 
     function remove (req, res) {
         return res.json({
-            status: 'OK'
+            status: 'OK',
+            data: null
         });
     }
 

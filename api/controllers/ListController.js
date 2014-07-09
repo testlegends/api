@@ -72,7 +72,27 @@ module.exports = (function () {
     }
 
     function update (req, res) {
+        var listId = req.param('id');
+        var title = req.body.title;
+        var desc = req.body.desc;
+        var terms = req.body.terms;
 
+        List.update({
+            id: listId
+        }, {
+            title: title,
+            desc: desc,
+            terms: terms
+        }, function (err, list) {
+            if (err) {
+                console.log(err);
+            }
+
+            return res.json({
+                status: 'OK',
+                data: list
+            });
+        });
     }
 
     function remove (req, res) {
