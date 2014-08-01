@@ -13,19 +13,19 @@
   "dependencies": {
     "sails": "^0.10.0-rc7",
     "sails-mongo": "^0.10.0-rc3",
-    "ejs": "0.8.4",
-    "optimist": "0.3.4",
+    "ejs": "1.0.0",
+    "optimist": "0.6.1",
     "iniparser": "^1.0.5",
-    "newrelic": "^1.4.0",
+    "newrelic": "^1.8.0",
     "nodetime": "^0.8.15",
     "underscore": "^1.6.0",
-    "requirejs": "^2.1.11",
+    "requirejs": "^2.1.14",
     "passport": "^0.2.0",
     "passport-http-bearer": "^1.0.1"
   },
   "devDependencies": {
     "frisby": "^0.8.1",
-    "mongodb": "^1.4.5"
+    "mongodb": "^1.4.7"
   },
   "scripts": {
     "start": "node app.js",

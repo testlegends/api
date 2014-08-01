@@ -20,17 +20,75 @@ frisby.create('OAuth2 login')
         grant_type: 'password'
     })
     .expectStatus(200)
-    .afterJSON(function(response) {
+    .afterJSON(function (response) {
         frisby.globalSetup({ // globalSetup is for ALL requests
             request: {
-                headers: { 'Authorization': response.token_type + ' '+ response.access_token }
+                'headers': { 'Authorization': response.token_type + ' '+ response.access_token },
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
             }
         });
 
         frisby.create('Get Lists')
             .get(apiServerUrl + '/lists')
             .expectStatus(200)
-            .expectJSONLength(2)
+            .expectJSONLength('data', 2)
+            .toss();
+
+        frisby.create('Create List')
+            .put(apiServerUrl + '/lists', {
+                title: 'Test List',
+                desc: 'Test Description',
+                terms: [
+                    {
+                        term: 'g',
+                        definition: 'Gravitational Force'
+                    }
+                ]
+            }, { json: true })
+            .expectStatus(200)
+            .expectJSON({
+                status: 'OK',
+                data: {
+                    title: 'Test List',
+                    desc: 'Test Description',
+                    terms: [
+                        {
+                            term: 'g',
+                            definition: 'Gravitational Force'
+                        }
+                    ]
+                }
+            })
+            .afterJSON(function (response) {
+                frisby.create('Update')
+                    .post(apiServerUrl + '/list/' + response.data.id, {
+                        title: 'Test List Updated',
+                        desc: 'Test Description Updated',
+                        terms: [
+                            {
+                                term: 'm',
+                                definition: 'meter'
+                            }
+                        ]
+                    }, { json: true })
+                    .expectStatus(200)
+                    .expectJSON({
+                        status: 'OK',
+                        data: {
+                            id: response.id,
+                            title: 'Test List Updated',
+                            desc: 'Test Description Updated',
+                            terms: [
+                                {
+                                    term: 'm',
+                                    definition: 'meter'
+                                }
+                            ]
+                        }
+                    })
+                    .toss();
+            })
             .toss();
     })
     .toss();

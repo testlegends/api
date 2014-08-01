@@ -111,8 +111,18 @@ module.exports = (function () {
     }
 
     function remove (req, res) {
-        return res.json({
-            status: 'OK'
+        var questionId = req.param('id');
+
+        Question.destroy({
+            id: questionId
+        }, function (err) {
+            if (err) {
+                console.log(err);
+            }
+
+            return res.json({
+                status: 'OK'
+            });
         });
     }
 

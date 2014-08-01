@@ -5,6 +5,8 @@
  * @created     :: 2014/05/21
  */
 
+var ObjectID = require('mongodb').ObjectID;
+
 module.exports = {
 
     lists_test: [
@@ -14,12 +16,28 @@ module.exports = {
             terms: [
                 {
                     term: 'g',
-                    desc: 'gravitational force'
+                    definition: 'gravitational force',
+                    options: [{ text: 'e' } , { text: 'c' }, { text: 'm' }]
                 }
             ],
             meta: {
-                creatorId: '',
-                userId: ''
+                oldListId: null,
+                userId: 'abcdef1234567890deadbeef'
+            }
+        },
+        {
+            title: 'Math Class',
+            desc: 'Grade 1 Math',
+            terms: [
+                {
+                    term: 'm',
+                    definition: 'meter',
+                    options: []
+                }
+            ],
+            meta: {
+                oldListId: null,
+                userId: '53562b9335e2098c4c0001fa'
             }
         }
     ],
@@ -41,7 +59,7 @@ module.exports = {
             ],
             background: "space.jpg",
             meta: {
-                creatorId: "1",
+                creatorId: "abcdef1234567890deadbeef",
                 scope: "public",
                 status: "published",
                 default_options_per_question: 4,
@@ -49,7 +67,7 @@ module.exports = {
                 time_per_question: 20
             },
             stats: {},
-            _id: "53701a6556c4a5d9b400009d"
+            _id: new ObjectID("53701a6556c4a5d9b400009d")
         },
         {
             name: "Hunger Game",
@@ -67,7 +85,7 @@ module.exports = {
             ],
             background: "forest.jpg",
             meta: {
-                creatorId: "1",
+                creatorId: "abcdef1234567890deadbeef",
                 scope: "private",
                 status: "draft",
                 default_options_per_question: 4,
@@ -75,7 +93,7 @@ module.exports = {
                 time_per_question: 20
             },
             stats: {},
-            _id: "53701a95b2411a45f5000068"
+            _id: new ObjectID("53701a95b2411a45f5000068")
         }
     ],
 
@@ -114,7 +132,7 @@ module.exports = {
                 }
             ],
             meta: {
-                userId: "1",
+                userId: "abcdef1234567890deadbeef",
                 attack: 10,
                 defense: 10,
                 hp: 100,

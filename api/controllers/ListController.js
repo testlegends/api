@@ -31,17 +31,23 @@ module.exports = (function () {
 
     function create (req, res) {
         var userId = req.user.id;
+        var oldListId = req.body.oldListId;
         var title = req.body.title;
         var desc = req.body.desc;
-        var creatorId = req.body.quizlet === 1 ? 1 : userId;
-        var terms = req.body.terms;
+        var terms = req.body.terms.map(function (term) {
+            return {
+                term: term.term,
+                definition: term.definition,
+                options: term.options || []
+            };
+        });
 
         List.create({
             title: title,
             desc: desc,
             terms: terms,
             meta: {
-                creatorId: creatorId,
+                oldListId: oldListId,
                 userId: userId
             }
         }, function (err, list) {
@@ -90,13 +96,25 @@ module.exports = (function () {
 
             return res.json({
                 status: 'OK',
-                data: list
+                data: list[0]
             });
         });
     }
 
     function remove (req, res) {
+        var listId = req.param('id');
 
+        List.destroy({
+            id: listId
+        }, function (err) {
+            if (err) {
+                console.log(err);
+            }
+
+            return res.json({
+                status: 'OK'
+            });
+        });
     }
 
     return {

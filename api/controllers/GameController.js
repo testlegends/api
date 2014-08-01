@@ -22,7 +22,10 @@ module.exports = (function () {
         var creatorId = req.user.id;
 
         Game.find({
-            'meta.creatorId': creatorId
+            'meta.creatorId': creatorId,
+            'meta.status': {
+                '!': 'trashed'
+            }
         }, function(err, games){
             if (err) {
                 console.log(err);
@@ -36,13 +39,22 @@ module.exports = (function () {
     }
 
     function create (req, res) {
-        // TODO need to check payment history
-        var privateGameAvailable = true;
+        if (req.body.list) {
+            GameService.generateFromList(req.body.list, function (err, game) {
+                if (err) {
+                    console.log(err);
+                }
 
-        var name = req.body.name;
-        var scope = req.body.scope;
+                return res.json({
+                    status: 'OK',
+                    data: game
+                });
+            });
 
-        if (privateGameAvailable) {
+        } else {
+            var name = req.body.name;
+            var scope = req.body.scope;
+
             Game.create({
                 name: name,
                 meta: {
@@ -59,11 +71,6 @@ module.exports = (function () {
                     status: 'OK',
                     data: game
                 });
-            });
-        } else {
-            return res.json({
-                status: 'NO_PRIVATE_AVALIABLE',
-                error: 'No private game available for your account'
             });
         }
     }
@@ -95,10 +102,44 @@ module.exports = (function () {
     }
 
     function remove (req, res) {
-        return res.json({
-            status: 'OK',
-            data: null
-        });
+        var gameId = req.param('id');
+        var permanent = req.query.permanent === 1 ? true : false;
+
+        if (permanent) {
+            Game.destroy({
+                id: gameId
+            }, function (err) {
+                if (err) {
+                    console.log(err);
+                }
+
+                Question.destroy({
+                    'meta.gameId': gameId
+                }, function (err) {
+                    if (err) {
+                        console.log(err);
+                    }
+
+                    return res.json({
+                        status: 'OK'
+                    });
+                });
+            });
+        } else {
+            Game.update({
+                id: gameId
+            }, {
+                "meta.status": "trashed"
+            }, function (err) {
+                if (err) {
+                    console.log(err);
+                }
+
+                return res.json({
+                    status: 'OK'
+                });
+            });
+        }
     }
 
     return {
