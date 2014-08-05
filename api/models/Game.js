@@ -17,14 +17,9 @@ module.exports = (function(){
             required: true
         },
 
-        monsters: {
-            type: 'arary',
-            defaultsTo: []
-        },
-
-        background: {
+        theme: {
             type: 'string',
-            defaultsTo: 'forest.jpg'
+            defaultsTo: 'forest'
         },
 
         meta: {

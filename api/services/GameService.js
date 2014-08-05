@@ -9,51 +9,64 @@
 
 module.exports = (function(){
 
-    function generateFromList (list, cb) {
-        Game.create({
-            name: list.title,
-            meta: {
-                creatorId: list.meta.userId,
-                scope: 'public',
-                status: 'draft'
-            }
-        }, function (err, game) {
+    function generateFromList (params, cb) {
+        var termsPerStage = 8;
+
+        List.findOne({ id: params.listId }, function (err, list) {
             if (err) {
-                console.log(err);
-                return cb(err, null);
+                cb(err, null);
+                return;
             }
 
-            _getTwentyTerms(list).forEach(function (term, index) {
-                Question.create({
-                    difficulty: 'easy',
-                    type: 'multiple_choice',
-                    content: term.definition,
-                    options: {
-                        correct: term.term,
-                        wrong: _getRandomOptions(list.terms, term)
-                    },
-                    meta: {
-                        gameId: game.id,
-                        order: index
-                    }
-                }, function(err, question) {
-                    if (err) {
-                        console.log(err);
-                    }
+            Game.create({
+                name: list.title,
+                meta: {
+                    creatorId: list.meta.userId,
+                    scope: 'public',
+                    status: 'published',
+                    heroHealth: params.heroHealth,
+                    timer: params.timer
+                }
+            }, function (err, game) {
+                if (err) {
+                    console.log(err);
+                    return cb(err, null);
+                }
 
-                    return cb(null, game);
+                _getTerms(list, termsPerStage).forEach(function (term, index) {
+                    Question.create({
+                        difficulty: 'easy',
+                        type: 'multiple_choice',
+                        content: term.definition,
+                        options: {
+                            correct: term.term,
+                            wrong: _getRandomOptions(list.terms, term, termsPerStage)
+                        },
+                        meta: {
+                            gameId: game.id,
+                            order: index
+                        }
+                    }, function(err, question) {
+                        if (err) {
+                            console.log(err);
+                        }
+
+                        return cb(null, game);
+                    });
                 });
             });
         });
     }
 
-    function _getTwentyTerms (list) {
-        return list.terms.slice(0, 20);
+    function _getTerms (list, maxTerms) {
+        var num = maxTerms || 20;
+        return list.terms.slice(0, num);
     }
 
-    function _getRandomOptions (allTerms, term) {
+    function _getRandomOptions (allTerms, term, maxTerms) {
+        var num = maxTerms || 20;
         var predefinedOptionsLength = term.options.length;
-        var totalTerms = allTerms.length > 20 ? 20 : allTerms.length;
+        var totalTerms = allTerms.length > num ? num : allTerms.length;
 
         if (predefinedOptionsLength < 3) {
             var existingOptions = term.options.map(function (option) { return option.text; });

@@ -13,6 +13,7 @@ module.exports = {
         {
             title: 'Physics Class',
             desc: 'Grade 12 physics class',
+            icon: 'science'
             terms: [
                 {
                     term: 'g',
@@ -28,6 +29,7 @@ module.exports = {
         {
             title: 'Math Class',
             desc: 'Grade 1 Math',
+            icon: 'math',
             terms: [
                 {
                     term: 'm',
@@ -45,52 +47,22 @@ module.exports = {
     games_test: [
         {
             name: "Game of Thrones",
-            monsters: [
-                {
-                    name: "monster",
-                    type: "minion",
-                    meta: {
-                        character_src: "ufo.png",
-                        attack: 10,
-                        defense: 8,
-                        hp: 100
-                    }
-                }
-            ],
-            background: "space.jpg",
+            theme: "space",
             meta: {
                 creatorId: "abcdef1234567890deadbeef",
                 scope: "public",
-                status: "published",
-                default_options_per_question: 4,
-                questions_per_stage: 5,
-                time_per_question: 20
+                status: "published"
             },
             stats: {},
             _id: new ObjectID("53701a6556c4a5d9b400009d")
         },
         {
             name: "Hunger Game",
-            monsters: [
-                {
-                    name: "monster",
-                    type: "minion",
-                    meta: {
-                        character_src: "furball.png",
-                        attack: 10,
-                        defense: 8,
-                        hp: 100
-                    }
-                }
-            ],
-            background: "forest.jpg",
+            theme: "forest",
             meta: {
                 creatorId: "abcdef1234567890deadbeef",
                 scope: "private",
-                status: "draft",
-                default_options_per_question: 4,
-                questions_per_stage: 5,
-                time_per_question: 20
+                status: "draft"
             },
             stats: {},
             _id: new ObjectID("53701a95b2411a45f5000068")

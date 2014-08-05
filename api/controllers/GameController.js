@@ -39,8 +39,12 @@ module.exports = (function () {
     }
 
     function create (req, res) {
-        if (req.body.list) {
-            GameService.generateFromList(req.body.list, function (err, game) {
+        if (req.body.listId) {
+            GameService.generateFromList({
+                listId: req.body.listId,
+                heroHealth: req.body.heroHealth,
+                timer: req.body.timer
+            }, function (err, game) {
                 if (err) {
                     console.log(err);
                 }

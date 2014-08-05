@@ -15,14 +15,25 @@ module.exports = (function(){
         title: {
             type: 'string'
         },
+
         desc: {
             type: 'string'
         },
-        terms : {
-            type: 'array'
+
+        icon: {
+            type: 'string',
+            in: ['geography', 'language', 'history', 'science', 'math', 'other'],
+            defaultsTo: 'other'
         },
+
+        terms : {
+            type: 'array',
+            defaultsTo: []
+        },
+
         meta: {
-            type: 'json'
+            type: 'json',
+            defaultsTo: {}
         }
     };
 
