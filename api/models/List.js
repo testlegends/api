@@ -20,7 +20,7 @@ module.exports = (function(){
             type: 'string'
         },
 
-        icon: {
+        category: {
             type: 'string',
             in: ['geography', 'language', 'history', 'science', 'math', 'other'],
             defaultsTo: 'other'

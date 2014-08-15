@@ -34,6 +34,7 @@ module.exports = (function () {
         var oldListId = req.body.oldListId;
         var title = req.body.title;
         var desc = req.body.desc;
+        var category = req.body.category;
         var terms = req.body.terms.map(function (term) {
             return {
                 term: term.term,
@@ -45,6 +46,7 @@ module.exports = (function () {
         List.create({
             title: title,
             desc: desc,
+            category: category,
             terms: terms,
             meta: {
                 oldListId: oldListId,
@@ -81,6 +83,7 @@ module.exports = (function () {
         var listId = req.param('id');
         var title = req.body.title;
         var desc = req.body.desc;
+        var category = req.body.category;
         var terms = req.body.terms;
 
         List.update({
@@ -88,6 +91,7 @@ module.exports = (function () {
         }, {
             title: title,
             desc: desc,
+            category: category,
             terms: terms
         }, function (err, list) {
             if (err) {

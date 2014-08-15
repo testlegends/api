@@ -14,7 +14,7 @@
 
 module.exports.policies = {
 
-    '*': 'isOAuthAuthenticated',
+    '*': ['isOAuthAuthenticated'],
 
     HomeController: {
         index: true

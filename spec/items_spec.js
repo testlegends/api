@@ -10,7 +10,7 @@
 var frisby = require('frisby');
 
 frisby.create('OAuth2 login')
-    .post('http://localhost:1338/oauth/token', {
+    .post('https://localhost:1338/oauth/token', {
         username: 'q@q.cc',
         password: 'fu041u03',
         client_id: '53562b9335e2e5c84c0001fa',

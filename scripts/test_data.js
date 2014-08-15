@@ -13,7 +13,7 @@ module.exports = {
         {
             title: 'Physics Class',
             desc: 'Grade 12 physics class',
-            icon: 'science'
+            category: 'science',
             terms: [
                 {
                     term: 'g',
@@ -29,7 +29,7 @@ module.exports = {
         {
             title: 'Math Class',
             desc: 'Grade 1 Math',
-            icon: 'math',
+            category: 'math',
             terms: [
                 {
                     term: 'm',

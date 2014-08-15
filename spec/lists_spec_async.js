@@ -10,8 +10,8 @@
 var frisby = require('frisby');
 var q = require('q');
 
-var oauthServerUrl = 'http://localhost:1338';
-var apiServerUrl = 'http://localhost:1339';
+var oauthServerUrl = 'https://leejefon.local:1338';
+var apiServerUrl = 'https://leejefon.local:1339';
 
 init();
 

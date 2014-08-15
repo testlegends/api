@@ -9,8 +9,8 @@
 
 var frisby = require('frisby');
 
-var oauthServerUrl = 'http://localhost:1338';
-var apiServerUrl = 'http://localhost:1339';
+var oauthServerUrl = 'https://leejefon.local:1338';
+var apiServerUrl = 'https://leejefon.local:1339';
 
 frisby.create('OAuth2 login')
     .post(oauthServerUrl + '/oauth/token', {
@@ -26,7 +26,6 @@ frisby.create('OAuth2 login')
                 headers: { 'Authorization': response.token_type + ' '+ response.access_token }
             }
         });
-
 
         frisby.create('Get List of Games')
             .get(apiServerUrl + '/games')

@@ -7,12 +7,16 @@
  * @created     :: 2014/04/20
  */
 
-module.exports = {
+module.exports = (function () {
 
-    index: function (req, res) {
-        return res.redirect('http://testlegends.com');
-    },
+    function index (req, res) {
+        return res.redirect('https://testlegends.com');
+    }
 
-    _config: {}
+    return {
+        index: index,
 
-};
+        _config: {}
+    };
+
+})();
