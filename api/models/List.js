@@ -34,6 +34,11 @@ module.exports = (function(){
         meta: {
             type: 'json',
             defaultsTo: {}
+        },
+
+        stats: {
+            type: 'array',
+            defaultsTo: []
         }
     };
 

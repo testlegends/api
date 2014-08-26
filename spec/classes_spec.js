@@ -1,16 +1,19 @@
 /**
- * heroes_spec
+ * classes_spec
  *
  * @module      :: Specs
  * @description ::
  * @author      :: Jeff Lee
- * @created     :: 2014/05/19
+ * @created     :: 2014/08/21
  */
 
 var frisby = require('frisby');
 
+var oauthServerUrl = 'https://leejefon.local:1338';
+var apiServerUrl = 'https://leejefon.local:1339';
+
 frisby.create('OAuth2 login')
-    .post('https://localhost:1338/oauth/token', {
+    .post(oauthServerUrl + '/oauth/token', {
         username: 'q@q.cc',
         password: 'fu041u03',
         client_id: '53562b9335e2e5c84c0001fa',
@@ -24,6 +27,19 @@ frisby.create('OAuth2 login')
             }
         });
 
+        frisby.create('Get Classes')
+            .get(apiServerUrl + '/games')
+            .expectStatus(200)
+            .expectJSONLength(2)
+            .toss();
 
+        frisby.create('Create Class')
+            .toss();
+
+        frisby.create('Add student')
+            .toss();
+
+        frisby.create('Add list')
+            .toss();
     })
     .toss();

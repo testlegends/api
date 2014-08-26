@@ -10,14 +10,7 @@
 module.exports = (function () {
 
     function index (req, res) {
-        var gameId = req.query.gameId;
-
-        if (!gameId) {
-            return res.json({
-                error: 'GAME_ID_NOT_FOUND',
-                msg: 'Game ID is required to get the list of questions'
-            });
-        }
+        var gameId = req.param('id');
 
         Question.find({
             "meta.gameId": gameId
@@ -34,14 +27,11 @@ module.exports = (function () {
     }
 
     function create (req, res) {
-        var gameId = req.body.gameId;
+        var gameId = req.param('id');
         var wrongAnswers = Array.apply(null, new Array(req.body.num_wrongs)).map(Object.prototype.valueOf, { text: "" });
 
-        // TODO some validations on difficulty and type, put default if not valid
         // TODO caluclate the order here instead of frontend
         Question.create({
-            difficulty: req.body.difficulty,
-            type: req.body.type,
             options: {
                 correct: '',
                 wrong: wrongAnswers
@@ -63,7 +53,7 @@ module.exports = (function () {
     }
 
     function find (req, res) {
-        var questionId = req.param('id');
+        var questionId = req.param('qid');
 
         Question.findOne({
             id: questionId
@@ -80,38 +70,58 @@ module.exports = (function () {
     }
 
     function update (req, res) {
-        var questionId = req.param('id');
+        var questionId = req.param('qid');
 
-        var wrongAnswersRaw = req.body.wrong.split(",");
-        var wrongAnswers = [];
-        for (var i in wrongAnswersRaw) {
-            wrongAnswers.push({ text: wrongAnswersRaw[i] });
-        }
+        if (req.body.stats) {
+            Question.update({
+                id: questionId
+            }, {
+                stats: req.body.stats
+            }, function (err, question) {
+                if (err) {
+                    console.log(err);
+                    return res.json({
+                        status: 'ERROR'
+                    });
+                }
 
-        Question.update({
-            id: questionId
-        }, {
-            difficulty: req.body.difficulty,
-            type: req.body.type,
-            content: req.body.content,
-            options: {
-                correct: req.body.correct,
-                wrong: wrongAnswers
-            }
-        }, function (err, question) {
-            if (err) {
-                console.log(err);
-            }
-
-            return res.json({
-                status: 'OK',
-                data: question
+                return res.json({
+                    status: 'OK'
+                });
             });
-        });
+        } else {
+            var wrongAnswersRaw = req.body.wrong.split(",");
+            var wrongAnswers = [];
+            for (var i in wrongAnswersRaw) {
+                wrongAnswers.push({ text: wrongAnswersRaw[i] });
+            }
+
+            Question.update({
+                id: questionId
+            }, {
+                content: req.body.content,
+                options: {
+                    correct: req.body.correct,
+                    wrong: wrongAnswers
+                }
+            }, function (err, question) {
+                if (err) {
+                    console.log(err);
+                    return res.json({
+                        status: 'ERROR'
+                    });
+                }
+
+                return res.json({
+                    status: 'OK',
+                    data: question
+                });
+            });
+        }
     }
 
     function remove (req, res) {
-        var questionId = req.param('id');
+        var questionId = req.param('qid');
 
         Question.destroy({
             id: questionId

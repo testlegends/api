@@ -7,6 +7,8 @@
  * @created     :: 2014/07/30
  */
 
+var validator = require('validator');
+
 module.exports = (function(){
 
     function generateFromList (params, cb) {
@@ -20,12 +22,16 @@ module.exports = (function(){
 
             Game.create({
                 name: list.title,
+                settings: {
+                    timer: params.timer,
+                    heroHealth: params.heroHealth,
+                    theme: 'forest',
+                    scope: 'public',
+                    status: 'published'
+                },
                 meta: {
                     creatorId: list.meta.userId,
-                    scope: 'public',
-                    status: 'published',
-                    heroHealth: params.heroHealth,
-                    timer: params.timer
+                    listId: params.listId
                 }
             }, function (err, game) {
                 if (err) {
@@ -35,8 +41,6 @@ module.exports = (function(){
 
                 _getTerms(list, termsPerStage).forEach(function (term, index) {
                     Question.create({
-                        difficulty: 'easy',
-                        type: 'multiple_choice',
                         content: term.definition,
                         options: {
                             correct: term.term,

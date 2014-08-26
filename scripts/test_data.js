@@ -9,6 +9,44 @@ var ObjectID = require('mongodb').ObjectID;
 
 module.exports = {
 
+    classes_test: [
+        {
+            name: 'SAT Class 1',
+            desc: '',
+            lists: [
+                { id: '' },
+                { id: '' }
+            ],
+            students: [
+                {
+                    id: '',
+                    games: []
+                }
+            ],
+            meta: {
+                userId: ''
+            },
+            stats: {}
+        },
+        {
+            name: 'SAT Class 2',
+            desc: '',
+            lists: [
+                { id: '' },
+                { id: '' }
+            ],
+            students: [
+                {
+
+                }
+            ],
+            meta: {
+                userId: ''
+            },
+            stats: {}
+        }
+    ],
+
     lists_test: [
         {
             title: 'Physics Class',
@@ -40,29 +78,45 @@ module.exports = {
             meta: {
                 oldListId: null,
                 userId: '53562b9335e2098c4c0001fa'
-            }
+            },
+            stats: [
+                {
+                    classId: '',
+                    studentsPlayed: []
+                }
+            ]
         }
     ],
 
     games_test: [
         {
             name: "Game of Thrones",
-            theme: "space",
+            settings: {
+                timer: 20,
+                hero_life: 5,
+                theme: "space",
+                scope: "public",
+                status: "published",
+            },
             meta: {
                 creatorId: "abcdef1234567890deadbeef",
-                scope: "public",
-                status: "published"
+                listId: ''
             },
             stats: {},
             _id: new ObjectID("53701a6556c4a5d9b400009d")
         },
         {
             name: "Hunger Game",
-            theme: "forest",
+            settings: {
+                timer: 20,
+                hero_life: 5,
+                theme: "forest",
+                scope: "private",
+                status: "draft",
+            },
             meta: {
                 creatorId: "abcdef1234567890deadbeef",
-                scope: "private",
-                status: "draft"
+                listId: ''
             },
             stats: {},
             _id: new ObjectID("53701a95b2411a45f5000068")
@@ -72,11 +126,6 @@ module.exports = {
     questions_test: [
         {
             content: "Mr. Jobling stood wringing his hands helplessly, his flaccid features expressive of _______ despair.",
-            difficulty: "easy",
-            meta: {
-                gameId: "53701a6556c4a5d9b400009d",
-                order: 1
-            },
             options: {
                 correct: "abhor",
                 wrong: [
@@ -85,32 +134,14 @@ module.exports = {
                     { text: "abject" }
                 ]
             },
-            stats: {},
-            type: "multiple_choice"
-        }
-    ],
-
-    heroes_test: [
-        {
-            name: "leejefon",
-            type: "archer",
-            skills: [
-                "Ultimate"
-            ],
-            games: [
-                {
-                    id: "53701a6556c4a5d9b400009d",
-                    questions_completed: 10
-                }
-            ],
             meta: {
-                userId: "abcdef1234567890deadbeef",
-                attack: 10,
-                defense: 10,
-                hp: 100,
-                mana: 100
+                gameId: "53701a6556c4a5d9b400009d",
+                order: 1
             },
-            stats: {}
+            stats: {
+                answerSelected: '',
+                timeSpent: ''
+            }
         }
     ],
 

@@ -9,8 +9,11 @@
 
 var frisby = require('frisby');
 
+var oauthServerUrl = 'https://leejefon.local:1338';
+var apiServerUrl = 'https://leejefon.local:1339';
+
 frisby.create('OAuth2 login')
-    .post('https://localhost:1338/oauth/token', {
+    .post(oauthServerUrl + '/oauth/token', {
         username: 'q@q.cc',
         password: 'fu041u03',
         client_id: '53562b9335e2e5c84c0001fa',
@@ -23,7 +26,5 @@ frisby.create('OAuth2 login')
                 headers: { 'Authorization': response.token_type + ' '+ response.access_token }
             }
         });
-
-
     })
     .toss();

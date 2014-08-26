@@ -17,9 +17,15 @@ module.exports = (function(){
             required: true
         },
 
-        theme: {
-            type: 'string',
-            defaultsTo: 'forest'
+        settings: {
+            type: 'json',
+            defaultsTo: {
+                timer: 20,
+                heroHealth: 5,
+                theme: 'forest',    // Options: forest, space, ...
+                scope: 'public',    // Options: public, private
+                status: 'published' // Options: published, draft, trashed
+            }
         },
 
         meta: {

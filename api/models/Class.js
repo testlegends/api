@@ -1,15 +1,15 @@
 /**
- * Player
+ * Class
  *
  * @module      :: Model
  * @description ::
  * @author      :: Jeff Lee
- * @created     :: 2014/04/20
+ * @created     :: 2014/08/21
  */
 
 module.exports = (function(){
 
-    var tableName = 'heroes';
+    var tableName = 'classes';
 
     var attributes = {
         name: {
@@ -17,24 +17,21 @@ module.exports = (function(){
             required: true
         },
 
-        type: {
-            type: 'string',
-            in: ['archer', 'magician'],
-            defaultsTo: 'archer'
+        desc: {
+            type: 'string'
         },
 
-        skills: {
+        lists: {
             type: 'array',
-            in: ['Ultimate'],
+            defaultsTo: []
+        },
+
+        students: {
+            type: 'array',
             defaultsTo: []
         },
 
         meta: {
-            type: 'json',
-            defaultsTo: {}
-        },
-
-        stats: {
             type: 'json',
             defaultsTo: {}
         }

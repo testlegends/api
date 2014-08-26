@@ -32,5 +32,11 @@ frisby.create('OAuth2 login')
             .expectStatus(200)
             .expectJSONLength(2)
             .toss();
+
+        frisby.create('Create empty game')
+            .toss();
+
+        frisby.create('Create game from list')
+            .toss();
     })
     .toss();
