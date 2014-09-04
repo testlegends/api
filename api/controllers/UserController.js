@@ -9,8 +9,19 @@
 
 module.exports = (function () {
 
-    // Used for OAuth for now
     function find (req, res) {
+        var id = req.param('id');
+
+        User.findOnebyId(id, function (err, user) {
+            return res.json({
+                status: 'OK',
+                data: user
+            });
+        });
+    }
+
+    // Used for OAuth for now
+    function user (req, res) {
         var user = req.user;
 
         delete user.password;
@@ -21,6 +32,7 @@ module.exports = (function () {
 
     return {
         find: find,
+        user: user,
 
         _config: {}
     };

@@ -71,14 +71,22 @@ module.exports = (function () {
 
     function addStudent (req, res) {
         var id = req.param('id');
-        var sid = req.body.studentId;
+        var email = req.body.email;
 
         ClassService.addStudent({
             id: id,
-            sid: sid
-        }, function (err) {
+            email: email
+        }, function (err, data) {
+            if (err) {
+                return res.json({
+                    status: 'ERROR',
+                    data: err
+                });
+            }
+
             return res.json({
-                status: 'OK'
+                status: 'OK',
+                data: data
             });
         });
     }
@@ -123,9 +131,17 @@ module.exports = (function () {
         ClassService.addList({
             id: id,
             lid: lid
-        }, function (err) {
+        }, function (err, data) {
+            if (err) {
+                return res.json({
+                    status: 'ERROR',
+                    data: err
+                });
+            }
+            
             return res.json({
-                status: 'OK'
+                status: 'OK',
+                data: data
             });
         });
     }

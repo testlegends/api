@@ -12,10 +12,13 @@ var validator = require('validator');
 module.exports = (function(){
 
     function list(params, cb) {
-        Class.find({
-            'meta.userId': params.userId
-        }, function (err, data) {
-            cb(null, data);
+        // TODO: Danger! Potential async problem
+        Class.find({}, function (err, data) {
+            var classes = data.filter(function (classObj) {
+                return classObj.meta.userId === params.userId || _indexOf(classObj.students, 'id', params.userId) !== -1
+            });
+
+            cb(null, classes);
         });
     }
 
@@ -58,11 +61,23 @@ module.exports = (function(){
     function addStudent (params, cb) {
         Class.findOneById(params.id, function (err, data) {
             // TODO: need to check if student already exists
-            data.students.push({
-                id: params.sid
-            });
+            User.findOneByEmail(params.email, function (err, user) {
+                if (!user) {
+                    cb('Student not found');
+                    return;
+                }
 
-            data.save(cb);
+                if (_indexOf(data.students, 'id', user.id) === -1) {
+                    data.students.push({
+                        id: user.id
+                    });
+
+                    data.save()
+                    cb(null, user);
+                } else {
+                    cb('Student already in the class')
+                }
+            });
         });
     }
 
@@ -93,11 +108,23 @@ module.exports = (function(){
     function addList (params, cb) {
         Class.findOneById(params.id, function (err, data) {
             // TODO: need to check if list already exists
-            data.lists.push({
-                id: params.lid
-            });
+            List.findOneById(params.lid, function (err, list) {
+                if (!list) {
+                    cb('List not found');
+                    return;
+                }
 
-            data.save(cb);
+                if (_indexOf(data.lists, 'id', list.id) === -1) {
+                    data.lists.push({
+                        id: list.id
+                    });
+
+                    data.save();
+                    cb(null, list);
+                } else {
+                    cb('List already in the class');
+                }
+            });
         });
     }
 
@@ -109,6 +136,16 @@ module.exports = (function(){
 
             data.save(cb);
         });
+    }
+
+    function _indexOf(arr, key, val) {
+        for (var i = 0; i < arr.length; i++) {
+            if (arr[i][key] == val) {
+                return i;
+            }
+        }
+
+        return -1;
     }
 
     return {

@@ -12,7 +12,8 @@ module.exports.routes = {
 
     '/': 'HomeController.index',
 
-    'GET  /user': 'UserController.find', // get current user info
+    'GET  /user'    : 'UserController.user', // get current user info
+    'GET  /user/:id': 'UserController.find',
 
     'GET    /classes'  : 'ClassController.index',
     'PUT    /classes'  : 'ClassController.create',
@@ -51,5 +52,10 @@ module.exports.routes = {
     'PUT    /game/:id/questions'    : 'QuestionController.create',
     'GET    /game/:id/question/:qid': 'QuestionController.find',   // GameId not needed
     'POST   /game/:id/question/:qid': 'QuestionController.update', // GameId not needed
-    'DELETE /game/:id/question/:qid': 'QuestionController.remove'  // GameId not needed
+    'DELETE /game/:id/question/:qid': 'QuestionController.remove', // GameId not needed
+
+    'GET  /stats/class/:id': 'StatsController.classStats',
+    'GET  /stats/list/:id' : 'StatsController.listStats',
+    'PUT  /stats/game/:id' : 'StatsController.updateGameStats',
+    'PUT  /stats/question/:id' : 'StatsController.updateQuestionStats',
 };
