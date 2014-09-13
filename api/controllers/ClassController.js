@@ -38,10 +38,17 @@ module.exports = (function () {
         ClassService.find({
             id: req.param('id')
         }, function (err, data) {
-            return res.json({
-                status: 'OK',
-                data: data
-            });
+            if (!data) {
+                return res.json({
+                    status: 'ERROR',
+                    data: 'Class not found'
+                });
+            } else {
+                return res.json({
+                    status: 'OK',
+                    data: data
+                });
+            }
         });
     }
 
