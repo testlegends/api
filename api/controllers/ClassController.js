@@ -24,6 +24,7 @@ module.exports = (function () {
         ClassService.create({
             name: req.body.name,
             desc: req.body.desc,
+            lists: req.body.lists,
             userId: req.user.id
         }, function (err, data) {
             return res.json({
@@ -124,13 +125,13 @@ module.exports = (function () {
         });
     }
 
-    function addList (req, res) {
+    function addLists (req, res) {
         var id = req.param('id');
-        var lid = req.body.listId;
+        var lids = req.body.listIds;
 
-        ClassService.addList({
+        ClassService.addLists({
             id: id,
-            lid: lid
+            lids: lids
         }, function (err, data) {
             if (err) {
                 return res.json({
@@ -138,7 +139,7 @@ module.exports = (function () {
                     data: err
                 });
             }
-            
+
             return res.json({
                 status: 'OK',
                 data: data
@@ -178,7 +179,7 @@ module.exports = (function () {
         removeStudent: removeStudent,
 
         getLists: getLists,
-        addList: addList,
+        addLists: addLists,
         findList: findList,
         removeList: removeList,
 

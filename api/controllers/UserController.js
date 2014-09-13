@@ -12,7 +12,7 @@ module.exports = (function () {
     function find (req, res) {
         var id = req.param('id');
 
-        User.findOnebyId(id, function (err, user) {
+        User.findOneById(id, function (err, user) {
             return res.json({
                 status: 'OK',
                 data: user

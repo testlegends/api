@@ -23,9 +23,14 @@ module.exports = (function(){
     }
 
     function create (params, cb) {
+        var lists = params.lists.map(function (list) {
+            return { id: list };
+        });
+
         Class.create({
             name: params.name,
             desc: params.desc,
+            lists: lists,
             meta: {
                 userId: params.userId
             }
@@ -105,25 +110,27 @@ module.exports = (function(){
         });
     }
 
-    function addList (params, cb) {
+    function addLists (params, cb) {
         Class.findOneById(params.id, function (err, data) {
-            // TODO: need to check if list already exists
-            List.findOneById(params.lid, function (err, list) {
-                if (!list) {
-                    cb('List not found');
+            List.find({
+                id: params.lids
+            }, function (err, lists) {
+                if (!lists) {
+                    cb('Lists not found');
                     return;
                 }
 
-                if (_indexOf(data.lists, 'id', list.id) === -1) {
-                    data.lists.push({
-                        id: list.id
-                    });
+                lists.forEach(function (list) {
+                    if (_indexOf(data.lists, 'id', list.id) === -1) {
+                        data.lists.push({
+                            id: list.id
+                        });
 
-                    data.save();
-                    cb(null, list);
-                } else {
-                    cb('List already in the class');
-                }
+                        data.save();
+                    }
+                });
+
+                cb(null, lists);
             });
         });
     }
@@ -159,7 +166,7 @@ module.exports = (function(){
         removeStudent: removeStudent,
 
         getLists: getLists,
-        addList: addList,
+        addLists: addLists,
         removeList: removeList
     };
 })();

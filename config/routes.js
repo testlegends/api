@@ -26,7 +26,7 @@ module.exports.routes = {
     'DELETE /class/:id/student/:sid': 'ClassController.removeStudent',
 
     'GET    /class/:id/lists'       : 'ClassController.getLists',
-    'PUT    /class/:id/lists'       : 'ClassController.addList',
+    'PUT    /class/:id/lists'       : 'ClassController.addLists',
     'GET    /class/:id/list/:lid'   : 'ClassController.findList',
     'DELETE /class/:id/list/:lid'   : 'ClassController.removeList',
 
