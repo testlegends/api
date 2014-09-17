@@ -41,6 +41,11 @@ module.exports = (function(){
             defaultsTo: null
         },
 
+        security_logs: {
+            type: 'array',
+            defaultsTo: []
+        },
+
         meta: {
             type: 'json',
             defaultsTo: {}

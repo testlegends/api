@@ -49,7 +49,7 @@ module.exports = {
 
     lists_test: [
         {
-            title: 'Physics Class',
+            title: 'Physics',
             desc: 'Grade 12 physics class',
             category: 'science',
             terms: [
@@ -65,7 +65,7 @@ module.exports = {
             }
         },
         {
-            title: 'Math Class',
+            title: 'Math',
             desc: 'Grade 1 Math',
             category: 'math',
             terms: [
