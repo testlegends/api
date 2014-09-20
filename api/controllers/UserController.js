@@ -20,6 +20,15 @@ module.exports = (function () {
         });
     }
 
+    function index (req, res) {
+        User.find({}, function (err, users) {
+            return res.json({
+                status: 'OK',
+                data: users
+            });
+        });
+    }
+
     // Used for OAuth for now
     function user (req, res) {
         var user = req.user;
@@ -32,6 +41,7 @@ module.exports = (function () {
 
     return {
         find: find,
+        index: index,
         user: user,
 
         _config: {}

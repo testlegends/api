@@ -13,6 +13,7 @@ module.exports.routes = {
     '/': 'HomeController.index',
 
     'GET  /user'    : 'UserController.user', // get current user info
+    'GET  /users'   : 'UserController.index',
     'GET  /user/:id': 'UserController.find',
 
     'GET    /classes'  : 'ClassController.index',
