@@ -39,7 +39,7 @@ module.exports = (function () {
     }
 
     function updateQuestionStats (req, res) {
-        StatsService.updateGameStats({
+        StatsService.updateQuestionStats({
             questionId: req.param('id'),
             stats: req.body.stats
         }, function (err, data) {
