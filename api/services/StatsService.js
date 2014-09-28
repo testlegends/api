@@ -4,7 +4,7 @@
  * @module      :: Service
  * @description ::
  * @author      :: Jeff Lee
- * @created     :: 2014/08/25
+ * @created     :: 2014/09/25
  */
 
 var _ = require('underscore');
@@ -14,6 +14,12 @@ module.exports = (function(){
     function getClassStats (id, cb) {
         // TODO: change to use promise instead of multi-level callbacks
         Class.findOneById(id, function (err, classObj) {
+
+            // Hack: currently in list page it calls class stats, need to get rid of this after list stats is done
+            if (!classObj) {
+                return cb(null, {});
+            }
+
             var listIds = classObj.lists.map(function (list) {
                 return list.id;
             });
@@ -35,10 +41,24 @@ module.exports = (function(){
                             listId: gameInfo.listId,
                             gameId: question.meta.gameId,
                             correct: question.options.correct,
-                            timeSpent: gameInfo.timePerQuestion - question.stats.remainingTime,
-                            selectedAnswer: question.stats.selectedAnswer
+                            timeSpent: gameInfo.timePerQuestion - (question.stats.remainingTime || 0),
+                            selectedAnswer: question.stats.selectedAnswer || question.options.correct // Hack: so empty answer won't show up
                         };
                     }).reduce(function (prev, curr) {
+                        if (!_getWrongOptions(curr.correct, curr.selectedAnswer)) {
+                            prev.totalGotRight++;
+                        }
+
+                        if (curr.timeSpent < prev.shortestTime) {
+                            prev.shortestTime = curr.timeSpent;
+                        }
+
+                        if (curr.timeSpent > prev.longestTime) {
+                            prev.longestTime = curr.timeSpent;
+                        }
+
+                        prev.totalTime += curr.timeSpent;
+
                         var studentIndex = _checkIdExists(prev.studentStats, curr.userId);
                         if (studentIndex !== -1) {
                             var listIndex = _checkIdExists(prev.studentStats[studentIndex].listsPlayed, curr.listId);
@@ -127,12 +147,36 @@ module.exports = (function(){
                             prev.listStats.push(newStats);
                         }
 
+                        if (curr.correct !== curr.selectedAnswer) {
+                            var correctTermIndex = _checkIdExists(prev.termStats, curr.correct);
+                            if (correctTermIndex !== -1) {
+                                prev.termStats[correctTermIndex].count++;
+                            } else {
+                                prev.termStats.push({ id: curr.correct, count: 1 });
+                            }
+
+                            wrongTermIndex = _checkIdExists(prev.termStats, curr.selectedAnswer);
+                            if (wrongTermIndex !== -1) {
+                                prev.termStats[wrongTermIndex].count++;
+                            } else {
+                                prev.termStats.push({ id: curr.selectedAnswer, count: 1 });
+                            }
+                        }
+
                         return prev;
                     }, {
                         totalStudents: classObj.students.length,
                         totalLists: classObj.lists.length,
+                        // totalTerms: lists.reduce(function (prev, curr) { prev += curr.terms.length; return prev; }, 0),
+                        totalGames: games.length,
+                        totalQuestions: questions.length,
+                        totalGotRight: 0,
+                        totalTime: 0,
+                        shortestTime: 20,
+                        longestTime: 0,
                         studentStats: [],
-                        listStats: []
+                        listStats: [],
+                        termStats: []
                     }));
                 });
             });
