@@ -11,13 +11,11 @@ var passport = require('passport'),
     BearerStrategy = require('passport-http-bearer').Strategy;
 
 passport.serializeUser(function (user, done) {
-    done(null, user[0].id);
+    done(null, user);
 });
 
-passport.deserializeUser(function (id, done) {
-    User.findOne({ id: id }, function (err, user) {
-        done(err, user);
-    });
+passport.deserializeUser(function (user, done) {
+    done(null, user);
 });
 
 /**
