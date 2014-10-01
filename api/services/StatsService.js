@@ -169,6 +169,7 @@ module.exports = (function(){
                         totalLists: classObj.lists.length,
                         // totalTerms: lists.reduce(function (prev, curr) { prev += curr.terms.length; return prev; }, 0),
                         totalGames: games.length,
+                        totalUniqQuestions: _.uniq(questions.map(function (q) { return q.options.correct; })).length,
                         totalQuestions: questions.length,
                         totalGotRight: 0,
                         totalTime: 0,
@@ -184,6 +185,10 @@ module.exports = (function(){
     }
 
     function getListStats (id, cb) {
+        cb(null, {});
+    }
+
+    function getStudentStats (id, cb) {
         cb(null, {});
     }
 
@@ -250,6 +255,7 @@ module.exports = (function(){
     return {
         getClassStats: getClassStats,
         getListStats: getListStats,
+        getStudentStats: getStudentStats,
         updateGameStats: updateGameStats,
         updateQuestionStats: updateQuestionStats
     };
