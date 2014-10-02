@@ -31,7 +31,8 @@ module.exports = (function(){
                 },
                 meta: {
                     creatorId: list.meta.userId,
-                    listId: params.listId
+                    listId: params.listId,
+                    classId: params.classId
                 }
             }, function (err, game) {
                 if (err) {

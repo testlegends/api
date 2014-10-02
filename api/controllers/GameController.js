@@ -35,7 +35,8 @@ module.exports = (function () {
             GameService.generateFromList({
                 listId: req.body.listId,
                 heroHealth: req.body.heroHealth,
-                timer: req.body.timer
+                timer: req.body.timer,
+                classId: req.body.classId
             }, function (err, game) {
                 if (err) {
                     console.log(err);
