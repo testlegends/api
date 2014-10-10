@@ -16,20 +16,22 @@ module.exports.connections = {
 
     mongodb: {
         module: 'sails-mongo',
-        host: process.env.MONGOHQ_HOST,
-        port: process.env.MONGOHQ_PORT,
-        database: process.env.MONGOHQ_DATABASE,
-        user: process.env.MONGOHQ_USERNAME,
-        password: process.env.MONGOHQ_PASSWORD
+        url: process.env.MONGOHQ_URL
+        // host: process.env.MONGOHQ_HOST,
+        // port: process.env.MONGOHQ_PORT,
+        // database: process.env.MONGOHQ_DATABASE,
+        // user: process.env.MONGOHQ_USERNAME,
+        // password: process.env.MONGOHQ_PASSWORD
     },
 
     mongodb_oauth_server: {
         module: 'sails-mongo',
-        host: process.env.MONGOHQ_OAUTH_HOST,
-        port: process.env.MONGOHQ_OAUTH_PORT,
-        database: process.env.MONGOHQ_OAUTH_DATABASE,
-        user: process.env.MONGOHQ_OAUTH_USERNAME,
-        password: process.env.MONGOHQ_OAUTH_PASSWORD
+        url: process.env.MONGOHQ_OAUTH_URL
+        // host: process.env.MONGOHQ_OAUTH_HOST,
+        // port: process.env.MONGOHQ_OAUTH_PORT,
+        // database: process.env.MONGOHQ_OAUTH_DATABASE,
+        // user: process.env.MONGOHQ_OAUTH_USERNAME,
+        // password: process.env.MONGOHQ_OAUTH_PASSWORD
     }
 
 };
