@@ -14,10 +14,13 @@ module.exports = (function(){
     function generateFromList (params, cb) {
         var termsPerStage = 8;
 
-        List.findOne({ id: params.listId }, function (err, list) {
+        List.findOneById(params.listId, function (err, list) {
             if (err) {
-                cb(err, null);
-                return;
+                return cb(err);
+            }
+
+            if (!list) {
+                return cb('List Not Found');
             }
 
             Game.create({

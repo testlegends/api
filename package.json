@@ -19,8 +19,8 @@
     "passport": "^0.2.0",
     "passport-http-bearer": "^1.0.1",
     "requirejs": "^2.1.14",
-    "sails": "^0.10.0-rc7",
-    "sails-mongo": "^0.10.0-rc3",
+    "sails": "0.10.0-rc7",
+    "sails-mongo": "0.10.0-rc3",
     "underscore": "^1.6.0",
     "validator": "^3.17.0"
   },

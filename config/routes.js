@@ -58,5 +58,5 @@ module.exports.routes = {
     'GET  /stats/class/:id': 'StatsController.classStats',
     'GET  /stats/list/:id' : 'StatsController.listStats',
     'PUT  /stats/game/:id' : 'StatsController.updateGameStats',
-    'PUT  /stats/question/:id' : 'StatsController.updateQuestionStats',
+    'PUT  /stats/question/:id' : 'StatsController.updateQuestionStats'
 };

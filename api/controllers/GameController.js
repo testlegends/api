@@ -21,6 +21,10 @@ module.exports = (function () {
         }, function(err, games){
             if (err) {
                 console.log(err);
+                return res.json({
+                    status: 'ERROR',
+                    data: err
+                })
             }
 
             return res.json({
