@@ -10,27 +10,52 @@
 module.exports = (function () {
 
     function index (req, res) {
-        var userId = req.user.id;
+        // login as
+        if (req.query.loginAs && req.user.role === 'admin') {
+            User.findOneByEmail(req.query.loginAs, function (err, user) {
+                if (user) {
+                    List.find({
+                        or: [
+                            { 'meta.userId': user.id },
+                            { 'meta.creatorId': user.id }
+                        ]
+                    }, function (err, lists) {
+                        if (err) {
+                            console.log(err);
+                        }
 
-        List.find({
-            or: [
-                { 'meta.userId': userId },
-                { 'meta.creatorId': userId }
-            ]
-        }, function (err, lists) {
-            if (err) {
-                console.log(err);
-            }
-
-            return res.json({
-                status: 'OK',
-                data: lists
+                        return res.json({
+                            status: 'OK',
+                            data: lists
+                        });
+                    });
+                } else {
+                    return res.json({
+                        status: 'ERROR',
+                        data: 'User not found'
+                    });
+                }
             });
-        });
+        } else {
+            List.find({
+                or: [
+                    { 'meta.userId': req.user.id },
+                    { 'meta.creatorId': req.user.id }
+                ]
+            }, function (err, lists) {
+                if (err) {
+                    console.log(err);
+                }
+
+                return res.json({
+                    status: 'OK',
+                    data: lists
+                });
+            });
+        }
     }
 
     function create (req, res) {
-        var userId = req.user.id;
         var oldListId = req.body.oldListId;
         var title = req.body.title;
         var desc = req.body.desc;
@@ -43,25 +68,57 @@ module.exports = (function () {
             };
         });
 
-        List.create({
-            title: title,
-            desc: desc,
-            category: category,
-            terms: terms,
-            meta: {
-                oldListId: oldListId,
-                userId: userId
-            }
-        }, function (err, list) {
-            if (err) {
-                console.log(err);
-            }
+        // login as
+        if (req.query.loginAs && req.user.role === 'admin') {
+            User.findOneByEmail(req.query.loginAs, function (err, user) {
+                if (user) {
+                    List.create({
+                        title: title,
+                        desc: desc,
+                        category: category,
+                        terms: terms,
+                        meta: {
+                            oldListId: oldListId,
+                            userId: user.id
+                        }
+                    }, function (err, list) {
+                        if (err) {
+                            console.log(err);
+                        }
 
-            return res.json({
-                status: 'OK',
-                data: list
+                        return res.json({
+                            status: 'OK',
+                            data: list
+                        });
+                    });
+                } else {
+                    return res.json({
+                        status: 'ERROR',
+                        data: 'User not found'
+                    });
+                }
             });
-        });
+        } else {
+            List.create({
+                title: title,
+                desc: desc,
+                category: category,
+                terms: terms,
+                meta: {
+                    oldListId: oldListId,
+                    userId: req.user.id
+                }
+            }, function (err, list) {
+                if (err) {
+                    console.log(err);
+                }
+
+                return res.json({
+                    status: 'OK',
+                    data: list
+                });
+            });
+        }
     }
 
     function find (req, res) {

@@ -10,28 +10,74 @@
 module.exports = (function () {
 
     function index (req, res) {
-        ClassService.list({
-            userId: req.user.id
-        }, function (err, data) {
-            return res.json({
-                status: 'OK',
-                data: data
+        // login as
+        if (req.query.loginAs && req.user.role === 'admin') {
+            User.findOneByEmail(req.query.loginAs, function (err, user) {
+                if (user){
+                    ClassService.list({
+                        userId: user.id
+                    }, function (err, classes) {
+                        return res.json({
+                            status: 'OK',
+                            data: classes
+                        });
+                    });
+                } else {
+                    return res.json({
+                        status: 'ERROR',
+                        data: 'User not found'
+                    });
+                }
             });
-        });
+        } else {
+            ClassService.list({
+                userId: req.user.id
+            }, function (err, data) {
+                return res.json({
+                    status: 'OK',
+                    data: data
+                });
+            });
+        }
+
     }
 
     function create (req, res) {
-        ClassService.create({
-            name: req.body.name,
-            desc: req.body.desc,
-            lists: req.body.lists,
-            userId: req.user.id
-        }, function (err, data) {
-            return res.json({
-                status: 'OK',
-                data: data
+        // login as
+        if (req.query.loginAs && req.user.role === 'admin') {
+            User.findOneByEmail(req.query.loginAs, function (err, user) {
+                if (user) {
+                    ClassService.create({
+                        name: req.body.name,
+                        desc: req.body.desc,
+                        lists: req.body.lists,
+                        userId: user.id
+                    }, function (err, data) {
+                        return res.json({
+                            status: 'OK',
+                            data: data
+                        });
+                    });
+                } else {
+                    return res.json({
+                        status: 'ERROR',
+                        data: 'User not found'
+                    });
+                }
             });
-        });
+        } else {
+            ClassService.create({
+                name: req.body.name,
+                desc: req.body.desc,
+                lists: req.body.lists,
+                userId: req.user.id
+            }, function (err, data) {
+                return res.json({
+                    status: 'OK',
+                    data: data
+                });
+            });
+        }
     }
 
     function find (req, res) {

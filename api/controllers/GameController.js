@@ -10,28 +10,57 @@
 module.exports = (function () {
 
     function index (req, res) {
-        var role = req.user.role;
-        var creatorId = req.user.id;
+        // login as
+        if (req.query.loginAs && req.user.role === 'admin') {
+            User.findOneByEmail(req.query.loginAs, function (err, user) {
+                if (user) {
+                    Game.find({
+                        'meta.creatorId': user.id,
+                        'settings.status': {
+                            '!': 'trashed'
+                        }
+                    }, function(err, games){
+                        if (err) {
+                            console.log(err);
+                            return res.json({
+                                status: 'ERROR',
+                                data: err
+                            })
+                        }
 
-        Game.find({
-            'meta.creatorId': creatorId,
-            'settings.status': {
-                '!': 'trashed'
-            }
-        }, function(err, games){
-            if (err) {
-                console.log(err);
-                return res.json({
-                    status: 'ERROR',
-                    data: err
-                })
-            }
-
-            return res.json({
-                status: 'OK',
-                data: games
+                        return res.json({
+                            status: 'OK',
+                            data: games
+                        });
+                    });
+                } else {
+                    return res.json({
+                        status: 'ERROR',
+                        data: 'User not found'
+                    });
+                }
             });
-        });
+        } else {
+            Game.find({
+                'meta.creatorId': req.user.id,
+                'settings.status': {
+                    '!': 'trashed'
+                }
+            }, function(err, games){
+                if (err) {
+                    console.log(err);
+                    return res.json({
+                        status: 'ERROR',
+                        data: err
+                    })
+                }
+
+                return res.json({
+                    status: 'OK',
+                    data: games
+                });
+            });
+        }
     }
 
     function create (req, res) {
@@ -51,8 +80,7 @@ module.exports = (function () {
                     data: game
                 });
             });
-
-        } else {
+        } else { // Only internal use
             var name = req.body.name;
 
             Game.create({

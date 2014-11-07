@@ -12,13 +12,10 @@ var validator = require('validator');
 module.exports = (function(){
 
     function list(params, cb) {
-        // TODO: Danger! Potential async problem
-        Class.find({}, function (err, data) {
-            var classes = data.filter(function (classObj) {
+        Class.find({}, function (err, classes) {
+            cb(null, classes.filter(function (classObj) {
                 return classObj.meta.userId === params.userId || _indexOf(classObj.students, 'id', params.userId) !== -1
-            });
-
-            cb(null, classes);
+            }));
         });
     }
 
