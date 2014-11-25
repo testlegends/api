@@ -8,7 +8,8 @@
  */
 
 var passport = require('passport'),
-    BearerStrategy = require('passport-http-bearer').Strategy;
+    BearerStrategy = require('passport-http-bearer').Strategy,
+    APIKeyStrategy = require('passport-localapikey').Strategy;
 
 passport.serializeUser(function (user, done) {
     done(null, user);
@@ -56,6 +57,24 @@ passport.use(new BearerStrategy(
         });
     }
 ));
+
+passport.use(new APIKeyStrategy({
+    apiKeyField: 'key'
+}, function (key, done) {
+    Client.findOne({ apikey: key }, function (err, apikey) {
+        if (err) { return done(err); }
+        if (!apikey) { return done(null, false); }
+
+        User.findOneById(apikey.userId, function (err, user) {
+            if (err) { return done(err); }
+                if (!user) { return done(null, false); }
+
+                    return done(null, user);
+                });
+            });
+        }
+));
+
 
 module.exports = {
     express: {

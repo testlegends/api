@@ -24,12 +24,16 @@ module.exports = (function(){
             type: 'string'
         },
 
-        userId: {
+        redirectURI: {
+            type: 'json'
+        },
+
+        apikey: {
             type: 'string'
         },
 
-        redirectURI: {
-            type: 'json'
+        userId: {
+            type: 'string'
         },
 
         icon: {

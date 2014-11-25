@@ -14,10 +14,16 @@
 
 module.exports.policies = {
 
-    '*': ['isOAuthAuthenticated'],
+    '*': ['isOAuthAuthenticated', 'isApiKeyAuthenticated'],
 
     HomeController: {
         index: true
+    },
+
+    // For Versal
+    GameController: {
+        create: ['isApiKeyAuthenticated'],
+        find: ['isApiKeyAuthenticated']
     }
 
 };
